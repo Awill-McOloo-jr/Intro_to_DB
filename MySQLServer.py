@@ -23,10 +23,13 @@ def create_database():
             cursor.close()
             connection.close()
 
-    except Error as e:
+    except mysql.connector.Error as e:
         print(f"Error: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    finally:
+        # Ensure that the connection is closed if it was successfully created
         if connection.is_connected():
-            cursor.close()
             connection.close()
 
 if __name__ == "__main__":
